@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
+require('dotenv').config();
 app.use('/public', express.static('public'));
 
 // upload files
@@ -11,10 +12,10 @@ const multer = require("multer");
 // connecting with mongoose
 const mongoose = require("mongoose");
 // connection
-mongoose.connect("mongodb://127.0.0.1:27017/movieDataDB",{
-useNewUrlParser: true,
-useUnifiedTopology: true
-})
+
+const uri = process.env.uri;
+// console.log(uri)
+mongoose.connect(uri)
 .then(() => console.log('Database connected successfully'))
 .catch((err) => console.error('Database connection error: ', err));
 
